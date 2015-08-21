@@ -118,6 +118,8 @@
 
 					</section>
 
+
+
 					<section>
 <pre><code>
 	//Object Literal
@@ -252,7 +254,49 @@ console.log(myOtherObj.thisTest());//2
 
 
 					<section>
+						<h1>Prototype</h1>
+						<ul>
+							<li>All functions has a prototype</li>
+							<li>Shared between all instances created with the "new" keyword</li>
+							<li>Used to share variables and functions</li>
+						</ul>
 
+<pre class="fragment"><code>
+function Goat(name, number) {
+  this.name = name;
+  this.number = number;
+}
+
+Goat.prototype.numberOfLegs = 4;
+Goat.prototype.makeSound = function () {
+   console.log("Bahh");
+}
+
+var goat1 = new Goat("Goat1", 1);
+var goat2 = new Goat("Goat2", 2);
+
+goat1.makeSound();//Bahh
+goat2.makeSound();//Bahh
+
+console.log(goat1.numberOfLegs);//4
+console.log(goat2.numberOfLegs);//4
+</code></pre>
+					</section>
+
+					<section>
+						<h1>Why Prototype?</h1>
+						<ul class="center">
+							<li class="fragment">Faster object creation</li>
+							<li class="fragment">Less memory</li>
+						</ul>
+					</section>
+
+					<section>
+						<img src="images/prototype-goats-example.png" alt="Prototype goats"/>
+					</section>
+
+					<section>
+						<img src="images/prototype.png" alt="Prototype"/>
 					</section>
 
 				</section>

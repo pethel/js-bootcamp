@@ -4,10 +4,10 @@
 	<head>
 		<meta charset="utf-8">
 
-		<title>reveal.js - The HTML Presentation Framework</title>
+		<title>JavaScript Boot Camp</title>
 
-		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
-		<meta name="author" content="Hakim El Hattab">
+		<meta name="description" content="Javascript boot camp">
+		<meta name="author" content="Peter Hellstrand">
 
 		<meta name="apple-mobile-web-app-capable" content="yes" />
 		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -237,7 +237,7 @@ function someName() {
 var myObj = {
    value: 1,
    thisTest: function() {
-      console.log(this.value); //?
+      console.log(this.value); // ?
    }
 };
 </code></pre>
@@ -251,6 +251,70 @@ var myOtherObj = {
 console.log(myOtherObj.thisTest());//2
 </code></pre>
 					</section>
+
+					<section>
+						<h1>Determining <i>this</i></h1>
+					</section>
+
+					<section>
+						<h1><i>new</i> binding</h1>
+						<p>If the function is called with the <i>new</i> keyword, then <i>this</i> is the newly created object.</p>
+<pre ><code >
+function Bar() {
+   this.value = 1;
+}
+
+var foo = new Bar();
+console.log(foo.value);// 1
+</code></pre>
+					</section>
+
+					<section>
+						<h1>Explicit binding</h1>
+						<p>If the function is called with call or apply this is the explicitly specified object.</p>
+
+<pre><code >
+function bar() {
+   console.log(this.value);
+}
+
+var foo = {
+   value: 9
+};
+
+bar.call(foo); //9
+</code></pre>
+
+					</section>
+
+					<section>
+						<h1>Implicit binding</h1>
+						<p>If the function is called from within a context <i>this</i> is the context object.</p>
+<pre><code >
+function bar() {
+   return this.value;
+}
+
+var foo = {
+  value: 9,
+  bar: bar
+};
+
+foo.bar();
+</code></pre>
+					</section>
+
+					<section>
+						<h1>Default binding</h1>
+						<p><i>this</i>will be the global object if not in strict mode</p>
+<pre><code >
+value = 2;
+function foo() {
+   console.log(this.value); // 2 (would be undefined in sctrict mode)
+}
+</code></pre>
+					</section>
+
 
 
 					<section>

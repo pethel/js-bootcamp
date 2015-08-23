@@ -61,9 +61,39 @@
 					<small>"JavaScript is a sword without a hilt."</small>
 				</section>
 
+				<!-- Types and grammar-->
 				<section>
 					<section>
-						<h1>this, objects and prototype</h1>
+						<h1>Types and grammar</h1>
+					</section>
+
+					<section>
+						<h1>Equality</h1>
+						<ul>
+							<li class="fragment">
+								Equality(==) allows coercion, identity(===) does not.
+							</li >
+							<li class="fragment">The Identity operator can never be slower.</li>
+						</ul>
+						<div class="fragment">
+
+<pre><code>
+	// Equality operator might surprise you
+	'' == '0'           // false
+	0 == ''             // true
+	0 == '0'            // true
+
+	false == 'false'    // false
+	false == '0'        // true
+
+</code></pre>
+						</div>
+
+
+						<p class="fragment center important">
+							These rules are not well understood by all developers so always use the Identity operator when possible.
+						</p>
+
 					</section>
 
 					<section>
@@ -75,17 +105,18 @@
 							<li class="fragment">boolean</li>
 							<li class="fragment">string</li>
 							<li class="fragment">number</li>
+							<li class="fragment">symbol(ES2015)</li>
 						</ul>
 
 					</section>
 
 					<section>
 <pre><code>
-   console.log(typeof true);//boolean
-   console.log(typeof 1);//number
-   console.log(typeof undefined);//undefined
-   console.log(typeof "Capra"); //string
-   console.log(typeof null)//object???
+	console.log(typeof true);//boolean
+	console.log(typeof 1);//number
+	console.log(typeof undefined);//undefined
+	console.log(typeof "Capra"); //string
+	console.log(typeof null)//object???
 
 </code></pre>
 						<small class="fragment ">
@@ -105,6 +136,13 @@
 							For a fraction of a section the primitive is coerced to an object.
 						</p>
 
+					</section>
+				</section>
+
+				<!-- this, objects and prototype-->
+				<section>
+					<section>
+						<h1>this, objects and prototype</h1>
 					</section>
 
 
@@ -306,7 +344,7 @@ foo.bar();
 
 					<section>
 						<h1>Default binding</h1>
-						<p><i>this</i>will be the global object if not in strict mode</p>
+						<p><i>this</i> will be the global object if not in strict mode</p>
 <pre><code >
 value = 2;
 function foo() {
@@ -361,6 +399,197 @@ console.log(goat2.numberOfLegs);//4
 
 					<section>
 						<img src="images/prototype.png" alt="Prototype"/>
+					</section>
+
+				</section>
+
+				<!-- Functions, scope and closure-->
+				<section>
+					<section>
+						<h1>Functions, scope and closure</h1>
+					</section>
+
+					<section>
+						<h1 >Functions</h1>
+<pre ><code >
+	/*Function decleration*/
+	function A(){};
+
+	/*Function expression*/
+	var B = function(){}
+
+	/*Namned function expression*/
+	var C = function foo(){}
+
+	/*Function constructor, as bad as eval()*/
+	var D = new Function("....");
+
+	/*Self invoking function expression*/
+	(function(){})();
+
+</code></pre>
+					</section>
+
+					<section>
+						<h1>Functions are first class objects</h1>
+						<ul>
+							<li>Store them in variables</li>
+							<li>Pass them as arguments to other functions</li>
+							<li>Create new functions during the execution of a program</li>
+							<li>Inherits from Object</li>
+							<li>Constructors when invoked with new keyword</li>
+						</ul>
+					</section>
+
+					<section>
+						<h1>Function scope</h1>
+						<div class="fragment">
+							<small>Java (block scope)</small>
+<pre ><code>
+public void foo() {
+   if(true) {
+      int a = 10;
+   }
+   System.out.println(a);//Error
+}
+</code></pre>
+						</div>
+
+						<div class="fragment">
+							<small>JavaScript (function scope)</small>
+<pre ><code>
+function foo() {
+   if(true) {
+      var a = 10;
+   }
+   console.log(a);//10
+}
+</code></pre>
+						</div>
+					</section>
+
+					<section>
+						<h1>Function arguments</h1>
+						<p>The arguments object is a local variable available within all functions.</p>
+<pre class="fragment"><code >
+function foo(a, b) {
+   console.log(a); // Hello
+   console.log(b); // undefined
+}
+test("Hello");
+</code></pre>
+
+<pre class="fragment"><code>
+function bar() {
+   for(var i = 0; i < arguments.length; i++) {
+      console.log(arguments[i]); // 1,2,3 and 4
+   }
+}
+</code></pre>
+					</section>
+
+					<section>
+						<h1>Hoisting</h1>
+						<small class="center">Because variable declarations are processed before any code is executed, declaring a variable anywhere in the code is equivalent to declaring it at the top.</small>
+					</section>
+
+					<section>
+						<p>Original code:</p>
+<pre><code>
+function hoist() {
+   var a = 2;
+   for(var i = 0; i < 10; i++ ){}
+   var b = 3;
+}
+</code></pre>
+					</section>
+
+					<section>
+						<p>Interpreted as:</p>
+<pre ><code>
+function hoist() {
+   var a, i, b;
+   a = 2;
+   for(i = 0; i < 10; i++ ){}
+   b = 3;
+}
+</code></pre>
+					</section>
+
+					<section>
+						<h1>Function Hoisting</h1>
+						<small>Function declarations are hoisted.</small>
+						<div class="fragment">
+							<small>Original code:</small>
+<pre><code>
+sayHello();//Hi!
+
+function sayHello() {
+   console.log("Hi!");
+}
+</code></pre>
+						</div>
+						<div class="fragment">
+							<small>Interpreted as:</small>
+<pre><code>
+function sayHello() {
+   console.log("Hi!");
+}
+sayHello();//Hi!
+</code></pre>
+						</div>
+					</section>
+
+					<section>
+						<h1>Function Hoisting</h1>
+						<small>Function expression are not hoisted.</small>
+						<div class="fragment">
+							<small>Original code:</small>
+<pre><code>
+sayHello();//Error
+
+var sayHell = function() {
+   console.log("Hi!");
+}
+</code></pre>
+						</div>
+						<div class="fragment">
+							<small>Interpreted as:</small>
+
+<pre class="fragment"><code>
+var sayHello;
+sayHello();//Error
+
+sayHell = function() {
+   console.log("Hi!");
+}
+</code></pre>
+						</div>
+					</section>
+
+					<section>
+						<h1>Closure</h1>
+						<p>"A closure is an expression (typically a function) that can have free variables together with an environment that binds those variables."</p>
+						<ul>
+							<li class="fragment">A closure is a function defined within another scope that has access to all the variables within the outer scope</li>
+							<li class="fragment">It keeps state</li>
+							<li class="fragment">Accessing variables outside of your immediate scope creates a closure</li>
+						</ul>
+					</section>
+
+					<section>
+<pre><code>
+function getInnerFunction() {
+   var counter = 0;
+   return function() {
+      return counter++;
+   }
+}
+
+var theInnerFunction = getInnerFunction();
+console.log(theInnerFunction());//0
+console.log(theInnerFunction());//1
+</code></pre>
 					</section>
 
 				</section>

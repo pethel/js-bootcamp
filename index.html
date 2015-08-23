@@ -137,6 +137,26 @@
 						</p>
 
 					</section>
+
+					<section>
+						<h1>Object wrappers</h1>
+						<p>don't use wrapper objects for primitive types</p>
+
+<pre><code>
+var foo = new String('Hello world'); // Written by Java developer :)
+console.log(typeof foo); // object
+</code></pre>
+
+<pre class="fragment"><code>
+var myValue = new Boolean(false);
+if(!myValue) {
+   // the intention
+} else {
+   console.log('Ooooops');
+}
+</code></pre>
+					</section>
+
 				</section>
 
 				<!-- this, objects and prototype-->

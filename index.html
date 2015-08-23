@@ -68,35 +68,6 @@
 					</section>
 
 					<section>
-						<h1>Equality</h1>
-						<ul>
-							<li class="fragment">
-								Equality(==) allows coercion, identity(===) does not.
-							</li >
-							<li class="fragment">The Identity operator can never be slower.</li>
-						</ul>
-						<div class="fragment">
-
-<pre><code>
-	// Equality operator might surprise you
-	'' == '0'           // false
-	0 == ''             // true
-	0 == '0'            // true
-
-	false == 'false'    // false
-	false == '0'        // true
-
-</code></pre>
-						</div>
-
-
-						<p class="fragment center important">
-							These rules are not well understood by all developers so always use the Identity operator when possible.
-						</p>
-
-					</section>
-
-					<section>
 						<h1>Objects</h1>
 						<p class="center">In javascript everything is treated as objects except:</p>
 						<ul class="center">
@@ -155,6 +126,53 @@ if(!myValue) {
    console.log('Ooooops');
 }
 </code></pre>
+					</section>
+
+					<section>
+						<h1>Equality</h1>
+						<ul>
+							<li class="fragment">
+								Equality(==) allows coercion, identity(===) does not.
+							</li >
+							<li class="fragment">The Identity operator can never be slower.</li>
+						</ul>
+						<div class="fragment">
+
+<pre><code>
+	// Equality operator might surprise you
+	'' == '0'           // false
+	0 == ''             // true
+	0 == '0'            // true
+
+	false == 'false'    // false
+	false == '0'        // true
+
+</code></pre>
+						</div>
+
+
+						<p class="fragment center important">
+							These rules are not well understood by all developers so always use the Identity operator when possible.
+						</p>
+
+					</section>
+
+					<section>
+						<h1>Conditionals</h1>
+						<p>Conditionals checks for thruty or falsy values.</p>
+<pre><code>
+if({}) {
+   console.log('objects are truthy')
+}
+</code></pre>
+						<div class="fragment">
+							<p>|| and && return values</p>
+<pre><code>
+var foo = null || 'someString'; // foo === 'someString'
+var bar = true && 'someString'; // bar === 'someString'
+</code></pre>
+
+						</div>
 					</section>
 
 				</section>
